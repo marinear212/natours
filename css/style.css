@@ -7,18 +7,21 @@ Dark green: #28b485
 
 */
 
-* {
+/* base css */
+* { 
 margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
 
-body {
+body { 
+    /* base font */
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
     color: #777;
+
     padding: 30px;
 }
 
@@ -33,7 +36,7 @@ body {
 }
 
 .logo-box {
-    position: absolute;
+    position: absolute; /* absolute relative to parent - parent position needs to be relative */
     top: 40px;
     left: 40px;
 }
@@ -42,7 +45,8 @@ body {
     height: 35px;
 }
 
-.text-box { /* centering */
+.text-box { 
+    /* centering */
     position: absolute;
     top: 40%;
     left: 50%;
@@ -52,6 +56,9 @@ body {
 .heading-primary {
     color: #ffffff;
     text-transform: uppercase;
+
+    /* fixing shaky animation */
+    backface-visibility: hidden;
 }
 
 .heading-primary-main {
@@ -59,6 +66,17 @@ body {
     font-size: 60px;
     font-weight: 400;
     letter-spacing: 35px;
+
+    /* only properties required for animation to work */
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+
+    /*
+    animation-delay: 3s; delays animation
+    animation-iteration-count: 3; repeats animation
+    */
+
+    animation-timing-function: ease-out;
 }
 
 .heading-primary-sub {
@@ -66,4 +84,39 @@ body {
     font-size: 20px;
     font-weight: 700;
     letter-spacing: 17.4px;
+
+    animation: moveInRight 1s ease-out;
+}
+
+/* browser animation - best to do opacity and transform only */
+@keyframes moveInLeft {
+    0% { /* start of the animation */
+        opacity: 0; /* invisible */
+        transform: translateX(-100px); /* start from 100px to the left */
+    }
+
+    70% {
+        transform: translateX(10px);
+    }
+
+    100% { /* end of the animation */
+        opacity: 1; /* visible */
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% { /* start of the animation */
+        opacity: 0; /* invisible */
+        transform: translateX(100px); /* start from 100px to the right */
+    }
+
+    70% {
+        transform: translateX(-10px);
+    }
+
+    100% { /* end of the animation */
+        opacity: 1; /* visible */
+        transform: translate(0);
+    }
 }
