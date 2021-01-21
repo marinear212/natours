@@ -36,7 +36,7 @@ body {
 }
 
 .logo-box {
-    position: absolute; /* absolute relative to parent - parent position needs to be relative */
+    position: absolute; /* absolute reference to closest parent which has relative position property */
     top: 40px;
     left: 40px;
 }
@@ -51,14 +51,18 @@ body {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    text-align: center;
 }
 
 .heading-primary {
-    color: #ffffff;
+    color: #fff;
     text-transform: uppercase;
 
     /* fixing shaky animation */
     backface-visibility: hidden;
+
+    margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -119,4 +123,73 @@ body {
         opacity: 1; /* visible */
         transform: translate(0);
     }
+}
+
+@keyframes moveInBottom {
+    0% { /* start of the animation */
+        opacity: 0; /* invisible */
+        transform: translateY(30px); /* start from 100px to the bottom */
+    }
+
+    100% { /* end of the animation */
+        opacity: 1; /* visible */
+        transform: translate(0);
+    }
+}
+
+.btn:link,
+.btn:visited { /* :link, :visited, etc are a pseudo-class - it defines a state of a selector */
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 100px;
+    transition: all .2s;
+
+    /* box model will work as if it is block element. 
+    We should do this when we want to give paddings, heights or width */
+    display: inline-block; 
+
+    position: relative;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2); /* x-axis y-axis- blur color */
+}
+
+.btn:active { /* clicked */
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2); /* x-axis y-axis- blur color */
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+}
+
+.btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s; /* transition is always defined in initial state */
+}
+
+.btn-white::after {
+    background-color: #fff;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-animated {
+    animation: moveInBottom .5s ease-out .75s; /* anim-name anim-duration anim-timing-function anim-delay */
+    animation-fill-mode: backwards; /* apply 0% styles before animation starts */
 }
