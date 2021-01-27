@@ -1,0 +1,44 @@
+/* browser animation - best to do opacity and transform only */
+@keyframes moveInLeft {
+    0% { /* start of the animation */
+        opacity: 0; /* invisible */
+        transform: translateX(-10rem); /* start from 10rem to the left */
+    }
+
+    70% {
+        transform: translateX(1rem);
+    }
+
+    100% { /* end of the animation */
+        opacity: 1; /* visible */
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% { /* start of the animation */
+        opacity: 0; /* invisible */
+        transform: translateX(10rem); /* start from 10rem to the right */
+    }
+
+    70% {
+        transform: translateX(-1rem);
+    }
+
+    100% { /* end of the animation */
+        opacity: 1; /* visible */
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInBottom {
+    0% { /* start of the animation */
+        opacity: 0; /* invisible */
+        transform: translateY(3rem);
+    }
+
+    100% { /* end of the animation */
+        opacity: 1; /* visible */
+        transform: translate(0);
+    }
+}

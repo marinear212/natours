@@ -1,0 +1,50 @@
+.row {
+    max-width: $grid-width; // one of the standards - 1140px for max width
+    background-color: #eee;
+    margin: 0 auto; // centering a block element inside another block element
+    
+    &:not(:last-child) { // select all the children elements except last child
+        margin-bottom: $gutter-vertical;
+    }
+
+    @include clearfix;
+
+    // attribute selector - select all elements that have class name start with "col-"
+    // ^= start with
+    // *= contains
+    // $= end with
+    [class^="col-"] {
+        background-color: orangered;
+        float: left;
+
+        &:not(:last-child) {
+            margin-right: $gutter-horizontal;
+        }
+    }
+
+    .col-1-of-2 {
+        // calc() - possible to do calculation with different units 
+        // use #{ } in order to use SASS variable in css native functions
+        width: calc((100% - #{$gutter-horizontal}) / 2);
+    }
+
+    .col-1-of-3 {
+        width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+    }
+
+    .col-1-of-4 {
+        width: calc((100% - 3 * #{$gutter-horizontal}) / 4);
+    }
+
+    .col-2-of-3 {
+        width: calc(2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal});
+    }
+
+    .col-2-of-4 {
+        width: calc(2 * ((100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal});
+    }
+
+    .col-3-of-4 {
+        width: calc(3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + 2 * #{$gutter-horizontal});
+    }
+}
