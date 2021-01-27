@@ -3,6 +3,8 @@ $color-primary-light: #7ed56f;
 $color-primary-dark: #28b485;
 
 $color-grey-dark: #777;
+$color-white: #fff;
+$color-black: #000;
 
 
 /* universal reset */
@@ -42,63 +44,63 @@ body {
     background-size: cover; /* fit the width of the viewport */
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
     position: relative;
-}
 
-.header__logo-box {
-    position: absolute; /* absolute reference to closest parent which has relative position property */
-    top: 4rem;
-    left: 4rem;
-}
+    &__logo-box {
+        position: absolute; /* absolute reference to closest parent which has relative position property */
+        top: 4rem;
+        left: 4rem;
+    }
 
-.header__logo {
-    height: 3.5rem;
-}
+    &__logo {
+        height: 3.5rem;
+    }
 
-.header__text-box { 
-    /* centering */
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    text-align: center;
+    &__text-box { 
+        /* centering */
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    
+        text-align: center;
+    }
 }
 
 .heading-primary {
-    color: #fff;
+    color: $color-white;
     text-transform: uppercase;
 
     /* fixing shaky animation */
     backface-visibility: hidden;
 
     margin-bottom: 6rem;
-}
 
-.heading-primary--main {
-    display: block;
-    font-size: 6rem;
-    font-weight: 400;
-    letter-spacing: 3.5rem;
-
-    /* only properties required for animation to work */
-    animation-name: moveInLeft;
-    animation-duration: 1s;
-
-    /*
-    animation-delay: 3s; delays animation
-    animation-iteration-count: 3; repeats animation
-    */
-
-    animation-timing-function: ease-out;
-}
-
-.heading-primary--sub {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 1.75rem;
-
-    animation: moveInRight 1s ease-out;
+    &--main {
+        display: block;
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+    
+        /* only properties required for animation to work */
+        animation-name: moveInLeft;
+        animation-duration: 1s;
+    
+        /*
+        animation-delay: 3s; delays animation
+        animation-iteration-count: 3; repeats animation
+        */
+    
+        animation-timing-function: ease-out;
+    }
+    
+    &--sub {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.75rem;
+    
+        animation: moveInRight 1s ease-out;
+    }
 }
 
 /* browser animation - best to do opacity and transform only */
@@ -146,60 +148,62 @@ body {
     }
 }
 
-.btn:link,
-.btn:visited { /* :link, :visited, etc are a pseudo-class - it defines a state of a selector */
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1.5rem 4rem;
-    border-radius: 10rem;
-    transition: all .2s;
+.btn {
+    &:link,
+    &:visited { /* :link, :visited, etc are a pseudo-class - it defines a state of a selector */
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        border-radius: 10rem;
+        transition: all .2s;
+    
+        /* box model will work as if it is block element. 
+        We should do this when we want to give paddings, heights or width */
+        display: inline-block; 
+    
+        position: relative;
+        font-size: 1.6rem;
+    }
+    
+    &:hover {
+        transform: translateY(-.3rem);
+        box-shadow: 0 1rem 2rem rgba($color-black, .2); /* x-axis y-axis- blur color */
 
-    /* box model will work as if it is block element. 
-    We should do this when we want to give paddings, heights or width */
-    display: inline-block; 
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+    
+    &:active { /* clicked */
+        transform: translateY(-.1rem);
+        box-shadow: 0 .5rem 1rem rgba($color-black, .2); /* x-axis y-axis- blur color */
+    }
 
-    position: relative;
-    font-size: 1.6rem;
-}
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s; /* transition is always defined in initial state */
+    }
+    
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
 
-.btn:hover {
-    transform: translateY(-.3rem);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .2); /* x-axis y-axis- blur color */
-}
-
-.btn:active { /* clicked */
-    transform: translateY(-.1rem);
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2); /* x-axis y-axis- blur color */
-}
-
-.btn--white {
-    background-color: #fff;
-    color: $color-grey-dark;
-}
-
-.btn::after {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 10rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all .4s; /* transition is always defined in initial state */
-}
-
-.btn--white::after {
-    background-color: #fff;
-}
-
-.btn:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
-}
-
-.btn--animated {
-    animation: moveInBottom .5s ease-out .75s; /* anim-name anim-duration anim-timing-function anim-delay */
-    animation-fill-mode: backwards; /* apply 0% styles before animation starts */
+        &::after {
+            background-color: $color-white;
+        }
+    }
+    
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s; /* anim-name anim-duration anim-timing-function anim-delay */
+        animation-fill-mode: backwards; /* apply 0% styles before animation starts */
+    }
 }
