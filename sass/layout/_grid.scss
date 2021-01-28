@@ -1,6 +1,5 @@
 .row {
     max-width: $grid-width; // one of the standards - 1140px for max width
-    background-color: #eee;
     margin: 0 auto; // centering a block element inside another block element
     
     &:not(:last-child) { // select all the children elements except last child
@@ -14,7 +13,6 @@
     // *= contains
     // $= end with
     [class^="col-"] {
-        background-color: orangered;
         float: left;
 
         &:not(:last-child) {
