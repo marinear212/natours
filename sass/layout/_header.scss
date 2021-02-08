@@ -2,11 +2,18 @@
     height: 95vh; /* 95% of viewport height */
     background-image: 
         linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), 
-        url(../img/hero.jpg);
+        url(../img/hero-small.jpg);
     background-size: cover; /* fit the width of the viewport */
     clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
     position: relative;
 
+    @media 
+    (min-resolution: 192dpi) and (min-width: 37.5em),
+    (min-width: 125em) { // responsive background image load - if resolution is higher than 192dpi, load below.
+        background-image: 
+        linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), 
+        url(../img/hero.jpg);
+    }
     @include respond(tab-port) {
         clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
     }
